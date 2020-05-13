@@ -28,14 +28,11 @@ def get_article(gzh):
 def get_html(url):
     request = urllib2.Request(url)
     response = urllib2.urlopen(request)
-    html = response.read()
-    return html
+    return response.read()
 
 # 下载图片
 def get_image(title,imgArray,source,time):
-    if os.path.isdir('./imgs'):
-        pass
-    else:
+    if not os.path.isdir('./imgs'):
         os.mkdir("./imgs")
     for item in imgArray:
         with open('imgs/' + (item)[-30:].replace('/','-') + ".png", 'a+') as file:

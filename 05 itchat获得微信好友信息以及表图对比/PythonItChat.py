@@ -13,8 +13,7 @@ class pythonWeChat(object):
     def save_info(self,NickName,Sex,Province,City,Signature):
         list=[]
         for i in self.friends:
-            dict={}
-            dict["NickName"]=i[NickName]
+            dict = {'NickName': i[NickName]}
             if i[Sex]==1:
                 dict["Sex"]="男"
             elif i[Sex]==2:

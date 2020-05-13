@@ -32,7 +32,7 @@ def clear_timeouted_message():
             count += 1
         else:
             break
-    for i in range(count):
+    for _ in range(count):
         item = msg_store.popitem(last=False)
 
 def get_sender_receiver(msg):
@@ -41,8 +41,6 @@ def get_sender_receiver(msg):
     if msg['FromUserName'][0:2] == '@@': # group chat
         sender = msg['ActualNickName']
         m = bot.search_chatrooms(userName=msg['FromUserName'])
-        if m is not None:
-            receiver = m['NickName']
     elif msg['ToUserName'][0:2] == '@@': # group chat by myself
         if 'ActualNickName' in msg:
             sender = msg['ActualNickName']
@@ -51,15 +49,13 @@ def get_sender_receiver(msg):
             if m is not None:
                 sender = m['NickName']
         m = bot.search_chatrooms(userName=msg['ToUserName'])
-        if m is not None:
-            receiver = m['NickName']
     else: # personal chat
         m = bot.search_friends(userName=msg['FromUserName'])
         if m is not None:
             sender = m['NickName']
         m = bot.search_friends(userName=msg['ToUserName'])
-        if m is not None:
-            receiver = m['NickName']
+    if m is not None:
+        receiver = m['NickName']
     return HTMLParser().unescape(sender), HTMLParser().unescape(receiver)
 
 def print_msg(msg):

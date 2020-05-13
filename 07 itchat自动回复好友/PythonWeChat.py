@@ -6,7 +6,7 @@ import itchat
 @itchat.msg_register('Text')
 def text_reply(msg):
     # 当消息不是由自己发出的时候
-    if not msg['FromUserName'] == myUserName:
+    if msg['FromUserName'] != myUserName:
         # 发送一条提示给文件助手
         itchat.send_msg(u"[%s]收到好友@%s 的信息：%s\n" %
                         (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(msg['CreateTime'])),
